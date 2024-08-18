@@ -90,6 +90,12 @@ router.post('/login', async (req, res) => {
 // user info update
 // account delete
 
+// Sign-out route
+router.post('/signout', (req, res) => {
+    // Simply send a success message
+    res.json({ msg: 'Logged out successfully' });
+});
+
 
 
 // Export the router so it can be used in server.js

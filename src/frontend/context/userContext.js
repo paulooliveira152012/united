@@ -25,7 +25,7 @@ export const UserProvider = ({ children }) => {
 
     const logoutUser = async () => {
         try {
-            const response = await fetch('http://localhost:5010/signout', {
+            const response = await fetch('http://localhost:5010/api/signout', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
