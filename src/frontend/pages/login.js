@@ -7,7 +7,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { loginUser } = useUser(); // Destructure loginUser from useUser
-  const navigation = useNavigate()
+  const navigate = useNavigate()
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -25,7 +25,7 @@ const Login = () => {
       if (response.ok) {
         loginUser(data); // Call loginUser to update the user context
         console.log("login successful")
-        navigation.navigation('/')
+        navigate("/")
       } else {
         console.error('Login failed:', data.message);
       }

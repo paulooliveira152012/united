@@ -29,7 +29,13 @@ const Profile = () => {
     };
 
     if (!user) {
-        return <div>Please log in</div>;
+        return (
+            <div>
+        <p>Please login</p>
+        <button onClick={() => navigate('/')}>Back home</button>
+        </ div>
+    )
+        
     } 
 
     return (
