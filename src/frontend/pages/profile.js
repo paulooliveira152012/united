@@ -33,6 +33,7 @@ const Profile = () => {
             <div>
         <p>Please login</p>
         <button onClick={() => navigate('/')}>Back home</button>
+        <button onClick={() => navigate('/signin')}>Login</button>
         </ div>
     )
         
