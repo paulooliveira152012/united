@@ -25,7 +25,8 @@ export const UserProvider = ({ children }) => {
 
     const logoutUser = async () => {
         try {
-            const response = await fetch('http://localhost:5010/api/signout', {
+            const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5010/api';
+            const response = await fetch(`${API_BASE_URL}/signout`,  {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -35,6 +36,7 @@ export const UserProvider = ({ children }) => {
             if (response.ok) {
               localStorage.removeItem('user');
               setUser(null);
+              console.log('UserContext: user logged out')
             } else {
               console.error('Failed to log out');
             }

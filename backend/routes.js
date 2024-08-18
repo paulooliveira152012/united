@@ -52,7 +52,7 @@ router.post('/signup', async (req, res) => {
 // 	"password" : "123456789"
 // }
 
-// login
+// login route
 router.post('/login', async (req, res) => {
     try {
       const { email, password } = req.body;
@@ -79,7 +79,7 @@ router.post('/login', async (req, res) => {
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
-  });
+});
 
 // test login:
 // 	"email" : "paulo@gmail.com",

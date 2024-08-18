@@ -11,6 +11,7 @@ const Signup = () => {
         password: '',
         profileImage: '', // Optional: You can implement an image upload feature later
     });
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -20,10 +21,12 @@ const Signup = () => {
         });
     };
 
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5010/api';
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:5010/api/signup', {
+            const response = await fetch(`${API_BASE_URL}/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

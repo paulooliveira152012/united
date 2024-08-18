@@ -14,19 +14,32 @@ dotenv.config();
 const app = express();
 
 // import routes
-const routes = require('./routes'); // Use require instead of import
+const apiRoutes = require('./routes'); // Use require instead of import
 
 // use cors to make sure web browser reads
 const cors = require('cors');
 
-app.use(cors());
+const allowedOrigins = ['http://localhost:5010', 'http://localhost:3000'];
 
+app.use(cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    }
+  }));
+
+app.options('*', cors())
 
 // Middleware to parse JSON bodies
 app.use(express.json());
 
 // Use routes; you can specify a base path if needed, e.g., '/api'
-app.use('/api', routes);
+app.use('/api', apiRoutes);
 
 // establish mongoose connection
 mongoose.connect(process.env.MONGO_URI, {
