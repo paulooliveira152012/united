@@ -16,6 +16,12 @@ const app = express();
 // import routes
 const routes = require('./routes'); // Use require instead of import
 
+// use cors to make sure web browser reads
+const cors = require('cors');
+
+app.use(cors());
+
+
 // Middleware to parse JSON bodies
 app.use(express.json());
 

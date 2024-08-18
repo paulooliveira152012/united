@@ -55,36 +55,31 @@ router.post('/signup', async (req, res) => {
 // login
 router.post('/login', async (req, res) => {
     try {
-        const { email, password } = req.body;
-
-        
-        if(!email || !password) {
-            return res.status(400).json({ message: 'Email and password are required' });
-        }
-
-        // validate the presence of email and password
-        const user = await User.findOne({ email });
-        if(!user) {
-            return res.status(401).json({ message: 'Invalid credentials' });
-        }
-
-        // compare the porvided password with stored password
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(401).json({ message: 'Invalid credentials' })
-        }
-
-        // convert user document to a plain object and remove password
-        const userObject = user.toObject();
-        delete userObject.password;
-
-        console.log('User Object from the backend login route is: ', userObject)
-        // login successful
-        res.status(200).json(userObject);
+      const { email, password } = req.body;
+  
+      if (!email || !password) {
+        return res.status(400).json({ message: 'Email and password are required' });
+      }
+  
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(401).json({ message: 'Invalid credentials' });
+      }
+  
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(401).json({ message: 'Invalid credentials' });
+      }
+  
+      // Convert user to object and remove sensitive data
+      const userObject = user.toObject();
+      delete userObject.password;
+  
+      res.status(200).json(userObject);
     } catch (error) {
-        res.status(500).json({ message: error.message })
+      res.status(500).json({ message: error.message });
     }
-});
+  });
 
 // test login:
 // 	"email" : "paulo@gmail.com",
